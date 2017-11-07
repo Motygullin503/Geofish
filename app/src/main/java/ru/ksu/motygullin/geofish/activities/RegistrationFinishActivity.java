@@ -4,9 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +24,10 @@ public class RegistrationFinishActivity extends AppCompatActivity {
     static EditText birthday;
     EditText city;
     Button finish;
-    Bundle userData;
     Context context = this;
+    SharedPreferences preferences;
+    boolean isAuthorizedFromSocials = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +43,18 @@ public class RegistrationFinishActivity extends AppCompatActivity {
 
         birthday = findViewById(R.id.birthday);
         city = findViewById(R.id.city);
+        preferences = context.getSharedPreferences(getString(R.string.shared_preferences_name), MODE_PRIVATE);
 
-        if (getIntent().getBundleExtra("userData") != null) {
-            userData = getIntent().getBundleExtra("userData");
-            if (userData.getString("birthday")!=null){
-                birthday.setText(userData.getString("birthday"));
-            }
-
-            if (userData.getString("city")!=null){
-                city.setText(userData.getString("city"));
-            }
+        if (!preferences.getString("socials", "").equals("")){
+            isAuthorizedFromSocials = true;
         }
 
+        if (!preferences.getString("birthday", "").equals("") && !preferences.getString("city", "").equals("")) {
+
+            birthday.setText(preferences.getString("birthday", ""));
+            city.setText(preferences.getString("city", ""));
+
+        }
 
 
         birthday.setOnClickListener(new View.OnClickListener() {
@@ -63,21 +66,36 @@ public class RegistrationFinishActivity extends AppCompatActivity {
         });
 
         finish = findViewById(R.id.btn_finish);
+
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PhotoSelectionActivity.class);
-                userData.putString("birthday", birthday.getText().toString());
-                userData.putString("city", city.getText().toString());
-                startActivity(intent, userData);
-                finish();
+
+                if (isAuthorizedFromSocials){
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("birthday", birthday.getText().toString());
+                    editor.putString("city", city.getText().toString());
+                    editor.apply();
+                    Intent intent = new Intent(context, ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(context, PhotoSelectionActivity.class);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("birthday", birthday.getText().toString());
+                    editor.putString("city", city.getText().toString());
+                    editor.apply();
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, InputInfoActivity.class);
-        intent.putExtra("userData", userData);
         startActivity(intent);
         finish();
         return true;
@@ -86,7 +104,6 @@ public class RegistrationFinishActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, InputInfoActivity.class);
-        intent.putExtra("userData", userData);
         startActivity(intent);
         finish();
     }

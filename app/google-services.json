@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "161821637688",
+    "firebase_url": "https://geofish-cb459.firebaseio.com",
+    "project_id": "geofish-cb459",
+    "storage_bucket": "geofish-cb459.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:161821637688:android:b69d34da7d31568c",
+        "android_client_info": {
+          "package_name": "ru.ksu.motygullin.geofish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "161821637688-frgmgsp1addh34qf9v4tnhd6ulvv0at9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.ksu.motygullin.geofish",
+            "certificate_hash": "f644fae17e80fb38843b2ef5e08a77ecb75076b0"
+          }
+        },
+        {
+          "client_id": "161821637688-48b3oc29uaahr86djkp18r73s1ns4hk5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMiIZvcIZioAVtMXBBg-SfouHnMDfJ7_o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "161821637688-48b3oc29uaahr86djkp18r73s1ns4hk5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "161821637688-k82laevq0gjq88onjko4oi9ff0mrblq0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "itis.geofish-ios"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

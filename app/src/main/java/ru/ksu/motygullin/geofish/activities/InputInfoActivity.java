@@ -2,11 +2,11 @@ package ru.ksu.motygullin.geofish.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +22,7 @@ public class InputInfoActivity extends AppCompatActivity {
     EditText surname;
     EditText password;
     Context context = this;
-    Bundle userData;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +36,17 @@ public class InputInfoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
-        if (getIntent().getExtras() != null) {
-
-            userData = getIntent().getBundleExtra("userData");
-
-            if (userData.getString("name")!=null){
-                name.setText(userData.getString("name"));
-            }
-
-            if (userData.getString("surname")!=null){
-                surname.setText(userData.getString("surname"));
-            }
-        }
-
-
+        preferences = context.getSharedPreferences(getString(R.string.shared_preferences_name), MODE_PRIVATE);
 
         name = findViewById(R.id.name);
         surname = findViewById(R.id.surname);
         password = findViewById(R.id.password);
         wrapper = findViewById(R.id.password_wrapper);
+
+        if (!preferences.getString("name", "").equals("") && !preferences.getString("surname", "").equals("")) {
+            name.setText(preferences.getString("name", ""));
+            surname.setText(preferences.getString("surname", ""));
+        }
 
 
         btn_next = findViewById(R.id.btn_next);
@@ -64,10 +55,11 @@ public class InputInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (password.getText().toString().length() >= 6) {
                     Intent intent = new Intent(context, RegistrationFinishActivity.class);
-                    userData.putString("name", name.getText().toString());
-                    userData.putString("surname", surname.getText().toString());
-                    userData.putString("password", password.getText().toString());
-                    intent.putExtra("userData", userData);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("name", name.getText().toString());
+                    editor.putString("surname", surname.getText().toString());
+                    editor.putString("password", password.getText().toString());
+                    editor.apply();
                     startActivity(intent);
                     finish();
                 } else {
@@ -80,7 +72,7 @@ public class InputInfoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, RegistrationActivity.class);
-        startActivity(intent, userData);
+        startActivity(intent);
         finish();
         return true;
     }
@@ -88,7 +80,7 @@ public class InputInfoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, RegistrationActivity.class);
-        startActivity(intent, userData);
+        startActivity(intent);
         finish();
     }
 }

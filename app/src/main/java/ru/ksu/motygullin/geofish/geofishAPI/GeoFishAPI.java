@@ -25,5 +25,9 @@ public interface GeoFishAPI {
                                        @Query("birthday") String birthday,
                                        @Query("photo") String photo);
 
+    @POST("/api/v1/login")
+    Call<RegModel> authentificate (@Query("email") String email,
+                                   @Query("password") String password);
+
 
 }

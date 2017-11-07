@@ -20,5 +20,7 @@ public class Api {
         api = retrofit.create(GeoFishAPI.class);
     }
 
-
+    public GeoFishAPI getApi(){
+        return api;
+    }
 }

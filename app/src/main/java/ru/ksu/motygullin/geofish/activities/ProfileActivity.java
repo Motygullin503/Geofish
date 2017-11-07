@@ -1,6 +1,10 @@
 package ru.ksu.motygullin.geofish.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -12,17 +16,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import ru.ksu.motygullin.geofish.R;
 
 public class ProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Context context = this;
+    SharedPreferences preferences;
+    ImageView photo;
+    TextView name;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        preferences = context.getSharedPreferences(getString(R.string.shared_preferences_name), MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,6 +59,17 @@ public class ProfileActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        photo = headerView.findViewById(R.id.imageView);
+        name = headerView.findViewById(R.id.text_name);
+
+        name.setText(preferences.getString("name", "")+" "+preferences.getString("surname", ""));
+
+        Glide.with(this)
+                .load(preferences.getString("photo", "https://firebasestorage.googleapis.com/v0/b/geofish-cb459.appspot.com/o/profile_images%2F0553E5D4-84D3-4E18-98AF-7A55753E9218.png?alt=media&token=a92050b8-f6d1-4d0a-80c5-715e8864d7a2"))
+                .apply(RequestOptions.circleCropTransform())
+                .into(photo);
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -79,7 +107,7 @@ public class ProfileActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -91,13 +119,11 @@ public class ProfileActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_search) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
