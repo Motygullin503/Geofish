@@ -92,6 +92,7 @@ public class PhotoSelectionActivity extends AppCompatActivity {
                                     Toast.makeText(context, "Успешная регистрация, теперь вы можете войти в свой аккаунт", Toast.LENGTH_LONG).show();
                                     SharedPreferences.Editor editor = preferences.edit();
                                     editor.putString("uid_token", response.body().getToken());
+                                    editor.putString("image_uri", mCropImageUri.toString());
                                     editor.putString("photo", String.valueOf(task.getResult().getDownloadUrl()));
                                     editor.apply();
                                     startActivity(intent);
@@ -148,7 +149,7 @@ public class PhotoSelectionActivity extends AppCompatActivity {
                 mCropImageUri = imageUri;
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
             } else {
-                // no permissions required or already grunted, can start crop image activity
+                // no permissions required or already granted, can start crop image activity
                 startCropImageActivity(imageUri);
             }
         }
@@ -183,5 +184,24 @@ public class PhotoSelectionActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+
 
 }

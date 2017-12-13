@@ -4,28 +4,35 @@
 
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" android:enabled="true">
 
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:checkable="true"
+            android:icon="@drawable/ic_bookmark_border_24px"
             android:title="Новости" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:checkable="true"
+            android:icon="@drawable/ic_map_24px"
             android:title="Карта" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:checked="true"
+            android:checkable="true"
+            android:icon="@drawable/ic_person_24px"
             android:title="Профиль" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:checkable="true"
+
+            android:icon="@drawable/fishing_club_icon"
             android:title="Клубы" />
 
         <item
             android:id="@+id/nav_search"
-            android:icon="@drawable/ic_search"
+            android:checkable="true"
+            android:icon="@drawable/ic_search_24px"
             android:title="Поиск" />
 
 

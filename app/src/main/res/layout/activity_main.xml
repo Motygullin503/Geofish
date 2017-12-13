@@ -104,6 +104,9 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <ImageButton
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:padding="15dp"
         android:id="@+id/vk_auth"
         android:layout_width="143dp"
         android:layout_height="52dp"
@@ -122,17 +125,18 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/ok_auth"
+
+        android:id="@+id/fb_auth"
         android:layout_width="143dp"
         android:layout_height="52dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/ok_back"
-        android:contentDescription="ok"
+        android:background="@drawable/create_acc_back"
+        android:contentDescription="fb"
         android:elevation="1dp"
-        android:src="@drawable/ok_znak_orange"
+        android:src="@drawable/facebook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.928"

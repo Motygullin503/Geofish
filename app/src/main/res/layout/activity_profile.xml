@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
+    app:theme="@style/AppTheme.Drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <include
@@ -15,12 +15,13 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
+        android:background="@drawable/side_nav_bar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header_profile"
-        app:itemBackground="@drawable/side_nav_bar"
-        app:itemTextColor="#FFFFFF"
+        app:itemTextColor="@drawable/drawer_item"
+        app:itemIconTint="@drawable/drawer_icon_color"
         app:menu="@menu/activity_profile_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

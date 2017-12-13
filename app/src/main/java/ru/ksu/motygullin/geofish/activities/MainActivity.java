@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
         register = findViewById(R.id.createAccount);
         vk_auth = findViewById(R.id.vk_auth);
 
-//        if (!preferences.getString("uid_token", "").equals("")) {
-//            Intent intent = new Intent(context, ProfileActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        if (!preferences.getString("uid_token", "").equals("")) {
+            Intent intent = new Intent(context, ProfileActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         vk_auth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,5 +144,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
 }
 
