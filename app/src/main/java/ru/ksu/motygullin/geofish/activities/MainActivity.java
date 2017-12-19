@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button register;
     ImageButton vk_auth;
+    Button authenticate;
     Activity context = this;
     SharedPreferences preferences;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         register = findViewById(R.id.createAccount);
+        authenticate = findViewById(R.id.signIn);
         vk_auth = findViewById(R.id.vk_auth);
 
         if (!preferences.getString("uid_token", "").equals("")) {
@@ -75,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        authenticate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AuthActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -85,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 // Пользователь успешно авторизовался
 
                 final SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("uid_token", res.accessToken);
+                editor.putString("uid_token", res.userId);
                 //посылаем запрос на данные
                 VKRequest request = VKApi.users().get(VKParameters.from(VKApiConst.USER_ID, res.userId, VKApiConst.FIELDS, "photo_max,city,bdate"));
 

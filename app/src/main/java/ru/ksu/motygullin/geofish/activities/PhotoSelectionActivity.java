@@ -83,14 +83,19 @@ public class PhotoSelectionActivity extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                             GeoFishAPI api = Api.getInstance().getApi();
+                            String reference = taskSnapshot.getMetadata().getDownloadUrl().toString();
+                            Log.d("EMAIL", email);
+                            Log.d("PASSWORD", password);
+                            Log.d("REF", reference);
 
-                            Call<RegModel> call = api.registerWithEmail(email, password, name, surname, city, birthday, String.valueOf(task.getResult().getDownloadUrl()));
+                            Call<RegModel> call = api.registerWithEmail(email, password, name, surname, city, birthday, reference);
                             call.enqueue(new Callback<RegModel>() {
                                 @Override
                                 public void onResponse(Call<RegModel> call, Response<RegModel> response) {
                                     Intent intent = new Intent(context, ProfileActivity.class);
                                     Toast.makeText(context, "Успешная регистрация, теперь вы можете войти в свой аккаунт", Toast.LENGTH_LONG).show();
                                     SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putInt("uid", response.body().getId());
                                     editor.putString("uid_token", response.body().getToken());
                                     editor.putString("image_uri", mCropImageUri.toString());
                                     editor.putString("photo", String.valueOf(task.getResult().getDownloadUrl()));

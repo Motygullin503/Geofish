@@ -7,23 +7,23 @@
     <group android:checkableBehavior="single" android:enabled="true">
 
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_feed"
             android:checkable="true"
             android:icon="@drawable/ic_bookmark_border_24px"
             android:title="Новости" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_map"
             android:checkable="true"
             android:icon="@drawable/ic_map_24px"
             android:title="Карта" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_profile"
             android:checked="true"
             android:checkable="true"
             android:icon="@drawable/ic_person_24px"
             android:title="Профиль" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_clubs"
             android:checkable="true"
 
             android:icon="@drawable/fishing_club_icon"

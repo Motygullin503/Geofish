@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "161821637688-gs368v8li7p18b9ir2onrlsamtqvl2o0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.ksu.motygullin.geofish",
+            "certificate_hash": "d21472e60ecd0779638457148f5d1fd56a9b1f46"
+          }
+        },
+        {
           "client_id": "161821637688-frgmgsp1addh34qf9v4tnhd6ulvv0at9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -40,15 +48,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "161821637688-48b3oc29uaahr86djkp18r73s1ns4hk5.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
               "client_id": "161821637688-k82laevq0gjq88onjko4oi9ff0mrblq0.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "itis.geofish-ios"
               }
+            },
+            {
+              "client_id": "161821637688-48b3oc29uaahr86djkp18r73s1ns4hk5.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         },

@@ -1,5 +1,6 @@
 package ru.ksu.motygullin.geofish.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class AuthActivity extends AppCompatActivity {
     TextInputEditText email;
     EditText password;
     Button signIn;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,9 @@ public class AuthActivity extends AppCompatActivity {
                     call.enqueue(new Callback<RegModel>() {
                         @Override
                         public void onResponse(Call<RegModel> call, Response<RegModel> response) {
-
+                            Intent intent = new Intent(context, ProfileActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
 
                         @Override
